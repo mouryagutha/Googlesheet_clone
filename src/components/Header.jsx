@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowLeft, FaDownload, FaUpload } from "react-icons/fa";
 import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({
   handleBackButtonClick,
@@ -11,6 +12,12 @@ const Header = ({
   handleFileImport
 }) => {
   const { user, handleSignOut } = useUser(); // Get user details from context
+  const navigate = useNavigate(); // Initialize navigation
+
+  const handleLogout = () => {
+    handleSignOut(); // Sign out user
+    navigate("/"); // Redirect to home page
+  };
 
   return (
     <div className="flex justify-between items-center p-4 bg-white border-b border-gray-200">
@@ -85,7 +92,7 @@ const Header = ({
           <div className="flex items-center">
             <span className="mr-2">{user.displayName}</span>
             <button
-              onClick={handleSignOut}
+              onClick={handleLogout}
               className="px-3 py-2 bg-red-500 text-white rounded"
             >
               Logout
