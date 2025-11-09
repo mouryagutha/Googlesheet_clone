@@ -1,26 +1,32 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Excel-style green gradient background -->
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Definition -->
   <defs>
-    <linearGradient id="excelGreen" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1D6F42;stop-opacity:1" />
+    <linearGradient id="sheetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#217346;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#107c41;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0e5c2f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="lightGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#33D17A;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#21A366;stop-opacity:1" />
     </linearGradient>
   </defs>
   
-  <!-- Main document shape -->
-  <path d="M6 2C4.89543 2 4 2.89543 4 4V28C4 29.1046 4.89543 30 6 30H26C27.1046 30 28 29.1046 28 28V8L22 2H6Z" fill="url(#excelGreen)"/>
+  <!-- Main rounded square background -->
+  <rect x="2" y="2" width="36" height="36" rx="6" fill="url(#sheetGradient)"/>
   
-  <!-- Folded corner -->
-  <path d="M22 2V8H28" fill="#185C37"/>
+  <!-- Spreadsheet grid pattern -->
+  <rect x="8" y="8" width="24" height="16" fill="white" opacity="0.15" rx="1"/>
   
-  <!-- Letter X -->
-  <text x="16" y="22" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">X</text>
+  <!-- Grid lines (3x3) -->
+  <line x1="16" y1="8" x2="16" y2="24" stroke="white" stroke-width="1" opacity="0.3"/>
+  <line x1="24" y1="8" x2="24" y2="24" stroke="white" stroke-width="1" opacity="0.3"/>
+  <line x1="8" y1="14" x2="32" y2="14" stroke="white" stroke-width="1" opacity="0.3"/>
+  <line x1="8" y1="18" x2="32" y2="18" stroke="white" stroke-width="1" opacity="0.3"/>
   
-  <!-- Grid lines to represent spreadsheet -->
-  <line x1="10" y1="10" x2="22" y2="10" stroke="white" stroke-width="0.5" opacity="0.5"/>
-  <line x1="10" y1="13" x2="22" y2="13" stroke="white" stroke-width="0.5" opacity="0.5"/>
-  <line x1="10" y1="16" x2="22" y2="16" stroke="white" stroke-width="0.5" opacity="0.5"/>
-  <line x1="13" y1="10" x2="13" y2="16" stroke="white" stroke-width="0.5" opacity="0.5"/>
-  <line x1="16" y1="10" x2="16" y2="16" stroke="white" stroke-width="0.5" opacity="0.5"/>
-  <line x1="19" y1="10" x2="19" y2="16" stroke="white" stroke-width="0.5" opacity="0.5"/>
+  <!-- SF Letters (SheetFlow) -->
+  <text x="20" y="33" font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="800" fill="white" text-anchor="middle" letter-spacing="-0.5">SF</text>
+  
+  <!-- Highlight accent -->
+  <circle cx="28" cy="12" r="2" fill="url(#lightGreen)" opacity="0.8"/>
 </svg>
