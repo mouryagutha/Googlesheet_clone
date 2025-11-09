@@ -504,6 +504,156 @@ const SpreadsheetPage = () => {
     setCellFormatting(newCellFormatting);
   };
 
+  // Alignment handler
+  const handleAlignment = (alignment) => {
+    if (selectedRange.size === 0) {
+      alert("Please select some cells first");
+      return;
+    }
+
+    const newCellFormatting = { ...cellFormatting };
+
+    [...selectedRange].forEach((cellId) => {
+      newCellFormatting[cellId] = {
+        ...(newCellFormatting[cellId] || {}),
+        textAlign: alignment,
+      };
+    });
+
+    setCellFormatting(newCellFormatting);
+  };
+
+  // Text color handler
+  const handleTextColor = (color) => {
+    if (selectedRange.size === 0) {
+      alert("Please select some cells first");
+      return;
+    }
+
+    const newCellFormatting = { ...cellFormatting };
+
+    [...selectedRange].forEach((cellId) => {
+      newCellFormatting[cellId] = {
+        ...(newCellFormatting[cellId] || {}),
+        color: color,
+      };
+    });
+
+    setCellFormatting(newCellFormatting);
+  };
+
+  // Background color handler
+  const handleBackgroundColor = (color) => {
+    if (selectedRange.size === 0) {
+      alert("Please select some cells first");
+      return;
+    }
+
+    const newCellFormatting = { ...cellFormatting };
+
+    [...selectedRange].forEach((cellId) => {
+      newCellFormatting[cellId] = {
+        ...(newCellFormatting[cellId] || {}),
+        backgroundColor: color,
+      };
+    });
+
+    setCellFormatting(newCellFormatting);
+  };
+
+  // Clear format handler
+  const handleClearFormat = () => {
+    if (selectedRange.size === 0) {
+      alert("Please select some cells first");
+      return;
+    }
+
+    const newCellFormatting = { ...cellFormatting };
+
+    [...selectedRange].forEach((cellId) => {
+      delete newCellFormatting[cellId];
+    });
+
+    setCellFormatting(newCellFormatting);
+  };
+
+  // Merge cells handler
+  const handleMergeCells = () => {
+    if (selectedRange.size <= 1) {
+      alert("Please select multiple cells to merge");
+      return;
+    }
+
+    alert("Merge cells feature will combine selected cells into one (coming soon with enhanced UI)");
+    // Implementation would require more complex cell spanning logic
+  };
+
+  // Fill down handler
+  const handleFillDown = () => {
+    if (selectedRange.size === 0) {
+      alert("Please select some cells first");
+      return;
+    }
+
+    saveToHistory(cells);
+    const coordinates = Array.from(selectedRange).map(cellId => {
+      const [row, col] = cellId.split("-").map(Number);
+      return { row, col };
+    });
+
+    // Get column range
+    const minCol = Math.min(...coordinates.map(c => c.col));
+    const maxCol = Math.max(...coordinates.map(c => c.col));
+    const minRow = Math.min(...coordinates.map(c => c.row));
+    const maxRow = Math.max(...coordinates.map(c => c.row));
+
+    const newCells = [...cells.map(row => [...row])];
+    
+    // Fill down for each column
+    for (let col = minCol; col <= maxCol; col++) {
+      const sourceValue = cells[minRow][col];
+      for (let row = minRow + 1; row <= maxRow; row++) {
+        newCells[row][col] = sourceValue;
+      }
+    }
+
+    setCells(newCells);
+    saveDataToFirebase(id, newCells);
+  };
+
+  // Fill right handler
+  const handleFillRight = () => {
+    if (selectedRange.size === 0) {
+      alert("Please select some cells first");
+      return;
+    }
+
+    saveToHistory(cells);
+    const coordinates = Array.from(selectedRange).map(cellId => {
+      const [row, col] = cellId.split("-").map(Number);
+      return { row, col };
+    });
+
+    // Get row range
+    const minRow = Math.min(...coordinates.map(c => c.row));
+    const maxRow = Math.max(...coordinates.map(c => c.row));
+    const minCol = Math.min(...coordinates.map(c => c.col));
+    const maxCol = Math.max(...coordinates.map(c => c.col));
+
+    const newCells = [...cells.map(row => [...row])];
+    
+    // Fill right for each row
+    for (let row = minRow; row <= maxRow; row++) {
+      const sourceValue = cells[row][minCol];
+      for (let col = minCol + 1; col <= maxCol; col++) {
+        newCells[row][col] = sourceValue;
+      }
+    }
+
+    setCells(newCells);
+    saveDataToFirebase(id, newCells);
+  };
+
   const handleUndo = () => {
     if (history.length > 0) {
       const prevState = history[history.length - 1];
@@ -758,6 +908,13 @@ const SpreadsheetPage = () => {
         handleRedo={handleRedo}
         handleCopy={handleCopy}
         handlePaste={handlePaste}
+        handleAlignment={handleAlignment}
+        handleTextColor={handleTextColor}
+        handleBackgroundColor={handleBackgroundColor}
+        handleMergeCells={handleMergeCells}
+        handleClearFormat={handleClearFormat}
+        handleFillDown={handleFillDown}
+        handleFillRight={handleFillRight}
       />
       <FormulaBar
         formulaBarValue={formulaBarValue}

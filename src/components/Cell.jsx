@@ -21,14 +21,18 @@ const Cell = ({
     const cellId = `${rowIndex}-${colIndex}`;
     const formatting = cellFormatting[cellId] || {};
 
-    // Initialize cell styles with center alignment and enhanced styling
+    // Initialize cell styles with all formatting options
     const cellStyle = {
         fontWeight: formatting.bold ? 'bold' : 'normal',
         fontStyle: formatting.italic ? 'italic' : 'normal',
         textDecoration: formatting.underline ? 'underline' : 'none',
+        textAlign: formatting.textAlign || 'center',
+        color: formatting.color || 'inherit',
+        backgroundColor: formatting.backgroundColor || 'transparent',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: formatting.textAlign === 'left' ? 'flex-start' : 
+                       formatting.textAlign === 'right' ? 'flex-end' : 'center',
         height: '100%',
         cursor: 'cell',
         userSelect: 'none',
@@ -39,10 +43,11 @@ const Cell = ({
     const inputStyle = {
         width: '100%',
         height: '100%',
-        textAlign: 'center',
+        textAlign: formatting.textAlign || 'center',
         border: 'none',
         outline: 'none',
-        background: 'white',
+        background: formatting.backgroundColor || 'white',
+        color: formatting.color || 'inherit',
         fontWeight: cellStyle.fontWeight,
         fontStyle: cellStyle.fontStyle,
         textDecoration: cellStyle.textDecoration,
