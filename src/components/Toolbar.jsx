@@ -1,22 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
+import React from "react";
+import { FaPlus, FaTrash } from "react-icons/fa";
 
 const Toolbar = ({ applyFunction, handleFormattingChange, addRow, deleteRow, addColumn, deleteColumn, clearSelectedCells, handleUndo, handleRedo, handleCopy, handlePaste }) => {
-  const [isEditDropdownOpen, setIsEditDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsEditDropdownOpen(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   return (
     <div className="toolbar border-b px-4 py-2 bg-white flex space-x-6 items-center flex-wrap shadow-sm">
@@ -124,46 +109,29 @@ const Toolbar = ({ applyFunction, handleFormattingChange, addRow, deleteRow, add
           <option value="FIND_AND_REPLACE">FIND & REPLACE</option>
         </select>
       </div>
+      
+      <div className="w-px h-14 bg-gray-300"></div>
 
-      {/* Edit Menu */}
-      <div className="border-l border-gray-300 pl-3">
-        <div className="relative inline-block text-left" ref={dropdownRef}>
+      {/* Editing Group - Undo/Redo */}
+      <div className="flex flex-col">
+        <span className="text-xs text-gray-500 mb-1">Editing</span>
+        <div className="flex items-center space-x-1">
           <button 
-            className="inline-flex justify-center rounded-lg border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
-            onClick={() => setIsEditDropdownOpen(!isEditDropdownOpen)}
+            onClick={handleUndo} 
+            className="flex flex-col items-center p-2 hover:bg-gray-100 rounded transition-all" 
+            title="Undo"
           >
-            <FaEdit className="mr-2" size={14} /> Edit
+            <span className="text-base">↩️</span>
+            <span className="text-xs">Undo</span>
           </button>
-          {isEditDropdownOpen && (
-            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-5 z-10">
-              <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                <button 
-                  onClick={() => { handleUndo(); setIsEditDropdownOpen(false); }} 
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 w-full text-left transition-colors"
-                >
-                  ↩️ Undo
-                </button>
-                <button 
-                  onClick={() => { handleRedo(); setIsEditDropdownOpen(false); }} 
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 w-full text-left transition-colors"
-                >
-                  ↪️ Redo
-                </button>
-                <button 
-                  onClick={() => { handleCopy(); setIsEditDropdownOpen(false); }} 
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 w-full text-left transition-colors"
-                >
-                  📋 Copy
-                </button>
-                <button 
-                  onClick={() => { handlePaste(); setIsEditDropdownOpen(false); }} 
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 w-full text-left transition-colors"
-                >
-                  📄 Paste
-                </button>
-              </div>
-            </div>
-          )}
+          <button 
+            onClick={handleRedo} 
+            className="flex flex-col items-center p-2 hover:bg-gray-100 rounded transition-all" 
+            title="Redo"
+          >
+            <span className="text-base">↪️</span>
+            <span className="text-xs">Redo</span>
+          </button>
         </div>
       </div>
     </div>
