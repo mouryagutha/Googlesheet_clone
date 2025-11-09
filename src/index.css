@@ -1,1 +1,64 @@
 @import "tailwindcss";
+
+/* Excel-style theme */
+:root {
+  --excel-green: #217346;
+  --excel-green-light: #107c41;
+  --excel-green-hover: #0e5c33;
+  --excel-gray: #f0f0f0;
+}
+
+/* Custom scrollbar styling - Excel style */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c0c0c0 #f0f0f0;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #f0f0f0;
+}
+
+/* Smooth transitions for all interactive elements */
+button, select, input {
+  transition: all 0.15s ease;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+/* Excel-style fonts */
+body {
+  font-family: 'Calibri', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}

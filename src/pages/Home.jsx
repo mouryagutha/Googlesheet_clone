@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth, provider } from "./auth/firebase";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/logo.svg";
 import { 
   loadSpreadsheets as fetchSpreadsheetsFromFirebase, 
   deleteSpreadsheetFromFirebase 
@@ -167,8 +167,8 @@ const Home = () => {
       <div className="header border-b p-4 bg-white shadow-sm">
         <header className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="flex items-center space-x-2">
-            <img src={logo} alt="zeotap Workspace logo" className="w-6 h-6" />
-            <span className="text-lg font-medium text-gray-800">Zeotap Docs</span>
+            <img src={logo} alt="SheetFlow Workspace logo" className="w-8 h-8" />
+            <span className="text-lg font-medium text-gray-800">SheetFlow</span>
           </div>
           <div className="flex items-center space-x-4">
             {user && (
@@ -216,7 +216,7 @@ const Home = () => {
               className="bg-green-600 text-white px-6 py-3 rounded mb-4 hover:bg-green-700 transition-colors"
               disabled={loading}
             >
-              {loading ? "Loading..." : "➕ New Spreadsheet"}
+              {loading ? "Loading..." : " New Spreadsheet"}
             </button>
             <div>
               <h2 className="text-xl font-semibold mt-6 text-gray-800">Your Spreadsheets</h2>
@@ -257,7 +257,7 @@ const Home = () => {
                         onClick={() => deleteSpreadsheet(sheet.id)}
                         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors"
                       >
-                        ❌ Delete
+                        Delete
                       </button>
                     </li>
                   ))}
@@ -269,14 +269,14 @@ const Home = () => {
           </>
         ) : (
           <div className="text-center bg-gradient-to-b from-blue-500 to-indigo-700 text-white py-20 px-6 rounded-lg shadow-lg">
-            <h1 className="text-5xl font-extrabold drop-shadow-lg text-gray-50">Welcome to Zeotap Workspace</h1>
+            <h1 className="text-5xl font-extrabold drop-shadow-lg text-gray-50">Welcome to SheetFlow</h1>
             <p className="text-lg mt-4 max-w-2xl mx-auto text-gray-200">
-              Zeotap Workspace provides a powerful, easy-to-use spreadsheet tool for organizing and managing data efficiently.
+              SheetFlow provides a powerful, easy-to-use spreadsheet tool for organizing and managing data efficiently.
               Whether you're tracking tasks, handling business data, or collaborating with your team, our cloud-based solution
               keeps everything secure and accessible anytime.
             </p>
             <div className="mt-8 bg-white bg-opacity-25 p-6 rounded-lg shadow-md">
-              <h3 className="text-2xl font-bold text-black">✨ Key Features</h3>
+              <h3 className="text-2xl font-bold text-black"> Key Features</h3>
               <ul className="text-lg mt-3 space-y-3">
                 <li className="flex items-center space-x-2 text-black">
                   <span className="text-green-300 text-xl">✔</span>

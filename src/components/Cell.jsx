@@ -21,7 +21,7 @@ const Cell = ({
     const cellId = `${rowIndex}-${colIndex}`;
     const formatting = cellFormatting[cellId] || {};
 
-    // Initialize cell styles with center alignment
+    // Initialize cell styles with center alignment and enhanced styling
     const cellStyle = {
         fontWeight: formatting.bold ? 'bold' : 'normal',
         fontStyle: formatting.italic ? 'italic' : 'normal',
@@ -31,7 +31,9 @@ const Cell = ({
         justifyContent: 'center',
         height: '100%',
         cursor: 'cell',
-        userSelect: 'none' // Prevents text selection
+        userSelect: 'none',
+        padding: '4px 8px',
+        transition: 'all 0.15s ease'
     };
 
     const inputStyle = {
@@ -40,10 +42,11 @@ const Cell = ({
         textAlign: 'center',
         border: 'none',
         outline: 'none',
-        background: 'transparent',
+        background: 'white',
         fontWeight: cellStyle.fontWeight,
         fontStyle: cellStyle.fontStyle,
-        textDecoration: cellStyle.textDecoration
+        textDecoration: cellStyle.textDecoration,
+        padding: '4px 8px'
     };
 
     // Focus input when editing starts
@@ -117,11 +120,14 @@ const Cell = ({
     return (
         <div
             id={cellId}
-            className={`border border-gray-300 p-0 relative ${selectedRange.has(cellId) ? 'bg-blue-100' : ''
+            className={`border border-gray-300 p-0 relative transition-all duration-100 ${
+                selectedRange.has(cellId) 
+                    ? 'bg-green-50 border-green-600 shadow-sm ring-2 ring-green-300' 
+                    : 'hover:bg-gray-50'
                 }`}
-
+            style={{ minHeight: '21px', backgroundColor: selectedRange.has(cellId) ? '#f0fdf4' : 'white' }}
             onMouseDown={(e) => {
-                e.preventDefault(); // Prevent text selection
+                e.preventDefault();
                 handleCellMouseDown(rowIndex, colIndex);
             }}
             onMouseEnter={() => handleCellMouseEnter(rowIndex, colIndex)}

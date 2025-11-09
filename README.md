@@ -1,6 +1,6 @@
-# 📊 Zeotap Doc - Google Sheets Clone  
+# 📊 SheetFlow - Modern Spreadsheet Application  
 
-Zeotap Doc is a modern **Google Sheets Clone** built with **React.js** and **Firebase**. It provides a seamless spreadsheet experience, enabling users to **create, edit, and store** data securely with **Google Authentication**.
+SheetFlow is a modern **spreadsheet application** built with **React.js** and **Firebase**. It provides a seamless spreadsheet experience, enabling users to **create, edit, and store** data securely with **Google Authentication**.
 
 ## 🚀 Features  
 ✅ **Spreadsheet UI** – Intuitive design resembling Google Sheets  
@@ -15,7 +15,7 @@ Zeotap Doc is a modern **Google Sheets Clone** built with **React.js** and **Fir
 - **Backend & Storage**: Firebase  
 - **Authentication**: Google OAuth via `@react-oauth/google`  
 - **Libraries Used**:  
-  - `xlsx` – Handling spreadsheet data  
+  - `exceljs` – Secure spreadsheet data handling (import/export)  
   - `react-router-dom` – Navigation  
   - `react-icons` – Icons support  
   - `eslint` – Code linting  
@@ -23,5 +23,5 @@ Zeotap Doc is a modern **Google Sheets Clone** built with **React.js** and **Fir
 ## 📥 Installation & Setup  
 ### 1️⃣ Clone the Repository  
 ```sh
-git clone https://github.com/your-username/zeotap-doc.git
-cd zeotap-doc
+git clone https://github.com/your-username/sheetflow.git
+cd sheetflow
